@@ -73,8 +73,107 @@ doDelete(),处理 ```DELETE```请求
 
 ### ```ServletConfig``` 和 ```ServletContext``` 的区别
 
-|类型|作用域|作用|可达对象|参数配置位置|
-|--|--|--|
-|ServletConfig|一个 ```Servlet``` 一个 ```ServletConfig```|传递发布配置给 ```Servlet``` |获取 ```ServletContext```|在 ```web.xml``` 中配置|
-|ServletContext|一个 ```web appp``` 一个 ```ServletContext```|获取 ```web appp``` 相关参数|应用相关信息,容器信息|在 ```web.xml``` 中配置|
+| 类型           | 作用域                                        | 作用                            | 可达对象                  | 参数配置位置            |
+| -------------- | --------------------------------------------- | ------------------------------- | ------------------------- | ----------------------- |
+| ServletConfig  | 一个 ```Servlet``` 一个 ```ServletConfig```   | 传递发布配置给 ```Servlet``` \| | 获取 ```ServletContext``` | 在 ```web.xml``` 中配置 |
+| ServletContext | 一个 ```web appp``` 一个 ```ServletContext``` | 获取 ```web appp``` 相关参数    | 应用相关信息,容器信息     | 在 ```web.xml``` 中配置 |
 
+
+##  ```Servlet``` 输出类型类型
+### characters 
+使用 ```PrintWrite``` 输出文本
+
+```java
+PrintWriter writer = reponse.getWriter();
+writer.println(" Some text and HTML")
+``` 
+### bytes
+使用 ```OutputStream``` 输出字节流
+```java
+ServletOutputStream out = resp.getOutputStream();
+out.write(byteArray);
+```
+
+## 设置响应头
+用 ```setHeader()```  或 ```addHeader``` 设置响应头
+
+- setHeader  
+覆盖原来的值
+
+- addHeader 
+可以添加多个值
+
+## 重定向路径配置区别
+使用 ```sendRedirect()```,进行重定向.
+流写入之后，不能再重定向
+
+有没有 ```/``` 的区别
+- 没有 ```/``` 
+根路径当前web项目根路径
+
+- 有 ```/``` 
+根路径为当前容器根路径
+
+## ```dislpatch```和 ```redirect``` 区别
+- ```dislpatch```
+服务端处理,客户端 ```URL``` 不变
+
+- ```redirect``` 
+客户端处理,客户端 ```URL``` 会变化
+
+
+ 
+## ```Web``` 容器模型
+### 1. 处理 ```Servlet``` 和 ```ServletContext```   初始化参数
+将 ```web.xml``` 中的发布参数写入到对应的  ```Servlet``` 配置中
+
+### 2. 处理 ```Serlvet``` 作用域参数
+处理不同作用域参数,包括 ```request```、 ```session```、 ```context``` 参数。
+
+### 3. 描述 ```Web``` 容器请求处理模型
+处理 ```Filter``` ,```Filter Chain``` ,```Request``` 和  ```Response```  包装器, ```Web(Serlet 或JSP)``` 资源
+
+### 4.  处理```Web``` 容器生命周期事件
+处理   ```request``` , ```sessions``` 和 ```Web``` 应用的生命周期事件，创建配置相应监听器
+
+### 5. 描述请求处理机制
+将请求和 ```Servet``` 绑定，查找 ```Servlet``` 对应的资源,配置请求到目标资源的请求参数
+
+
+## Servlet 配置初始化参数
+只有 ```Servlet``` 初始化完成后才能获取相应参数.
+容器初始化```Servlet``` 时，加载相应参数，只加载一次。
+
+- 配置初始化参数
+在 ```web.xml``` 中使用 ```<init-param>``` 配置参数 
+```xml
+    <servlet>
+        <servlet-name>ServletName</servlet-name>
+        <servlet-class>ServletClass</servlet-class>
+        <init-param>
+            <param-name>ParamName</param-name>
+            <param-value>ParamValue</param-value>
+        </init-param>
+    </servlet>
+```
+- 读取初始化参数
+在 ```servlet``` 中获取相应参数,
+```getServletConfig()``` 获取  ```ServletConfig```,通过 ```ServletConfig``` 获取相应参数 ```getInitParameter()``` 。
+
+## 配置上下文初始化参数 
+在 ```web.xml```中配置，整个 ```web app ```都可以使用。
+
+- 配置初始化参数
+使用 ```<context-param>``` 配置参数
+```xml
+    <context-param>
+        <param-name>ContextParamName</param-name>
+        <param-value>ContextParamValue</param-value>
+    </context-param>
+```
+
+- 读取初始化参数
+获取到 ```ServletContext``` ,再通过 ```ServletContext```  获取相应参数
+```java
+getServletContext().getInitParameter(ContextParamName);
+```

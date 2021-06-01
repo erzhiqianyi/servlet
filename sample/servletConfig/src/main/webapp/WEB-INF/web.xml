@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <servlet>
+        <servlet-name>HelloServlet</servlet-name>
+        <servlet-class>top.erzhiqian.servlet.HelloServlet</servlet-class>
+        <init-param>
+            <param-name>AdminEmail</param-name>
+            <param-value>admin@admin.com</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HelloServlet</servlet-name>
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>ContextParam</servlet-name>
+        <servlet-class>top.erzhiqian.servlet.ContextServlet</servlet-class>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>ContextParam</servlet-name>
+        <url-pattern>/context</url-pattern>
+    </servlet-mapping>
+
+
+    <context-param>
+        <param-name>CtxAdminEmail</param-name>
+        <param-value>adminCtx@admin.com</param-value>
+    </context-param>
+
+
+</web-app>
