@@ -177,3 +177,6 @@ out.write(byteArray);
 ```java
 getServletContext().getInitParameter(ContextParamName);
 ```
+
+## 监听器的作用
+监听状态变化，发生指定事件时，产生行为。
