@@ -180,3 +180,41 @@ getServletContext().getInitParameter(ContextParamName);
 
 ## 监听器的作用
 监听状态变化，发生指定事件时，产生行为。
+
+### 8大监听器
+- ServletContextAttributeListener  
+  监听 ``WebContext``` 的属性状态变化,包括添加,删除和替换.
+  
+- HttpSessionListener 
+  监听 ```Session````状态变化
+  
+- ServletRequestListener 
+  监听请求状态变化,包括请求初始化和销毁
+  
+- ServletRequestAttributeListener
+  监听请求属性状态变化,包括添加,删除和替换
+  
+- HttpSessionBindingListener
+  监听```session```中数据绑定事件i
+
+- HttpSessionAttributeListener
+  监听 ```session``` 属性状态变化,包括添加,删除和替换
+  
+- ServletContextListener 
+  监听```ServletContext``` 状态变化,包括初始化和销毁
+ 
+- HttpSessionActivationListener  
+  监听```session```在jvm状态中的变化
+
+### 三大作用域
+- Context
+  应用内都可以使用,非线程安全
+- Request
+  只有特定 ```ServletRequest``` 才能访问
+- Session
+  只有特定 ```HttpSession``` 才能访问
+  
+## Session 如何工作
+1. 请求到达容器,容器处理完后,返回一个独一无二的 ```session id``` 给客户端
+2. 客户端请求时,带上 ```session id``` 
+3. 容器根据 ```session id```查找对应数据
