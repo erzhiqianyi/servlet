@@ -20,6 +20,7 @@ public class HelloSession extends HttpServlet {
         out.println("<html><body>");
         out.println("<h1>" +message + "</h1>");
         out.println("<h1>" +"Test Session Attributes" + "</h1>");
+
         HttpSession session = request.getSession();
         if (session.isNew()){
             out.println("This is a new Session ");

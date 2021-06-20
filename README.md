@@ -215,6 +215,30 @@ getServletContext().getInitParameter(ContextParamName);
   只有特定 ```HttpSession``` 才能访问
   
 ## Session 如何工作
+基于 ```cookie``` 工作
 1. 请求到达容器,容器处理完后,返回一个独一无二的 ```session id``` 给客户端
 2. 客户端请求时,带上 ```session id``` 
 3. 容器根据 ```session id```查找对应数据
+
+## 没有 ```cookie``` 如何使用 ```session```
+客户端不允许 ```cookie``` ,解析返回报文时，会忽略 ```set-cookie``` 返回头，可以在其他地方定义唯一标志，来识别客户端。如添加url参数
+不要在参数中使用 ```jsessiionid```
+
+```cookie``` 本质，在客户端和服务端通信的键值对数据。服务端向客户端发送 ```cookie``` ,客户端返回 ```cookie``` 给服务端
+
+## 使 ```Session``` 失效 
+- 设置过期时间
+用 ```<seession-config>``` 配置过期时间,单位为分钟
+```xml
+    <session-config>
+        <session-timeout>15</session-timeout>
+    </session-config>
+```
+为指定 ```session``` 设置过期时间
+```java
+session.setMaxInactiveInterval();
+```
+- 调用 ```invalidate()``` 
+调用``` session.invalidate()```，主动让session失效
+
+- 终止应用程序

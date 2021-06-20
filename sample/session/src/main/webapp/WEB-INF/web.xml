@@ -8,10 +8,37 @@
         <servlet-name>HelloSession</servlet-name>
         <servlet-class>top.erzhiqian.servlet.HelloSession</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CookieTest</servlet-name>
+        <servlet-class>top.erzhiqian.servlet.CookieTest</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>CheckCookie</servlet-name>
+        <servlet-class>top.erzhiqian.servlet.CheckCookie</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>NameSubmit</servlet-name>
+        <servlet-class>top.erzhiqian.servlet.NameSubmit</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>HelloSession</servlet-name>
         <url-pattern>/hello</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>CookieTest</servlet-name>
+        <url-pattern>/cookieTest.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>CheckCookie</servlet-name>
+        <url-pattern>/checkCookie.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NameSubmit</servlet-name>
+        <url-pattern>/submitName</url-pattern>
+    </servlet-mapping>
 </web-app>
